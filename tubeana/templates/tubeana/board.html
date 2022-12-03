@@ -53,17 +53,38 @@
             <div
               class="d-sm-flex align-items-center justify-content-center mb-4"
             >
-                <img class="thumbnail" src="{{ thumbnail }}" />
-              <h1 class="h3 mb-0 text-gray-800 font-weight-bold">
-                {{title}} 의 분석결과 <p class="ml-2 pt-2" style="font-size: 30px">&#129300;</p>
-              </h1>
-
+              <div class="topline">
+                <img
+                  class="thumbnail shadow mr-4"
+                  src="{{ thumbnail }}"
+                  style="
+                    width: 300px;
+                    /* border: 3px solid #4e73df; */
+                    border-radius: 0.7rem;
+                    /* box-shadow: 0 0.3rem 0.3rem 0 #4e73df !important; */
+                  "
+                />
+                <div class="d-sm-flex align-items-center mt-4">
+                  <h2
+                    class="d-sm-flex align-items-center h2 text-primary font-weight-bold"
+                    style="min-width: 0"
+                  >
+                    [&nbsp
+                    <span
+                      class="h5 mb-0 text-gray-800 font-weight-bold limit-title"
+                      >{{title}}</span
+                    >
+                    &nbsp] 의 분석결과
+                    <span class="ml-2" style="font-size: 30px">&#129300;</span>
+                  </h2>
+                </div>
+              </div>
             </div>
 
             <!-- Content 1 Row -->
             <div class="row">
               <!-- 긍정부정 댓글 비율 -->
-              <div class="col-xl-4 col-lg-5">
+              <div class="col-auto d-flex align-items-stretch">
                 <div class="card shadow mb-4">
                   <!-- Card Header-->
                   <div
@@ -74,7 +95,7 @@
                     </h6>
                   </div>
                   <!-- Card Body -->
-                  <div class="card-body">
+                  <div class="card-body" style="margin-top: 30px">
                     <div class="chart-pie pt-4 pb-2">
                       <canvas id="myPieChart"></canvas>
                     </div>
@@ -91,7 +112,7 @@
               </div>
 
               <!-- 긍부정 댓글 top5 -->
-              <div class="col-xl-8 col-lg-7">
+              <div class="col-9">
                 <div class="card shadow mb-4">
                   <!-- Card Header -->
                   <div
@@ -126,29 +147,29 @@
                       <table class="table">
                         <thead>
                           <tr>
-                            <th width="10">top</th>
+                            <th class="table-num" width="10px">Top</th>
                             <th>댓글 내용</th>
                           </tr>
                         </thead>
                         <tbody>
                           <tr>
-                            <td>1</td>
+                            <td class="table-num">1</td>
                             <td id="topCmt1"></td>
                           </tr>
                           <tr>
-                            <td>2</td>
+                            <td class="table-num">2</td>
                             <td id="topCmt2"></td>
                           </tr>
                           <tr>
-                            <td>3</td>
+                            <td class="table-num">3</td>
                             <td id="topCmt3"></td>
                           </tr>
                           <tr>
-                            <td>4</td>
+                            <td class="table-num">4</td>
                             <td id="topCmt4"></td>
                           </tr>
                           <tr>
-                            <td>5</td>
+                            <td class="table-num">5</td>
                             <td id="topCmt5"></td>
                           </tr>
                         </tbody>
@@ -162,7 +183,7 @@
             <!--Content 2 Row -->
             <div class="row">
               <!--빈도수 높은 키워드 top10-->
-              <div class="col-xl-auto">
+              <div class="col-xl-auto d-flex align-items-stretch">
                 <div class="card shadow mb-4">
                   <!--Card header-->
                   <div
@@ -179,9 +200,111 @@
                       style="
                         width: 500px;
                         height: 250px;
+                        margin-top: 30px;
                         border: 1px solid rgb(255, 255, 255);
                       "
                     ></div>
+                  </div>
+                </div>
+              </div>
+              <!--댓글 작성 시간 분포도-->
+              <div class="col-xl-auto">
+                <div class="card shadow mb-4">
+                  <!--Card header-->
+                  <div
+                    class="card-header py-3 d-flex flex-row align-items-center justify-content-between"
+                  >
+                    <h6 class="m-0 font-weight-bold text-primary">
+                      댓글 작성 시간 분포도
+                    </h6>
+                  </div>
+                  <!--Card body-->
+                  <div class="card-body">
+                    <div class="chart-area">
+                      <canvas id="myAreaChart"></canvas>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!--content 3 Row-->
+            <div class="row">
+              <!--좋아요 많은 댓글 수-->
+              <div class="col-xl-6">
+                <div class="card shadow mb-4">
+                  <!--Card header-->
+                  <div
+                    class="card-header py-3 d-flex flex-row align-items-center justify-content-between"
+                  >
+                    <h6 class="m-0 font-weight-bold text-primary">
+                      좋아요 많은 댓글순
+                    </h6>
+                  </div>
+                  <!--Card body-->
+                  <div class="card-body">
+                    <div class="like-comment">
+                      <table class="table like-table">
+                        <tr>
+                          <th class="like-table-head table-num" width="8%">
+                            <img
+                              class="like-img"
+                              src="{%static 'assets/like.png'%}"
+                              width="16px"
+                            />
+                          </th>
+                          <th class="like-table-head">댓글 내용</th>
+                        </tr>
+                        <tbody>
+                          <tr>
+                            <td class="table-num" id="likeNum1"></td>
+                            <td id="likeCmt1"></td>
+                          </tr>
+                          <tr>
+                            <td class="table-num" id="likeNum2"></td>
+                            <td id="likeCmt2"></td>
+                          </tr>
+                          <tr>
+                            <td class="table-num" id="likeNum3"></td>
+                            <td id="likeCmt3"></td>
+                          </tr>
+                          <tr>
+                            <td class="table-num" id="likeNum4"></td>
+                            <td id="likeCmt4"></td>
+                          </tr>
+                          <tr>
+                            <td class="table-num" id="likeNum5"></td>
+                            <td id="likeCmt5"></td>
+                          </tr>
+                        </tbody>
+                      </table>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <!--관련영상 분석-->
+              <div class="col-xl-6">
+                <div class="card shadow mb-4">
+                  <!--Card header-->
+                  <div
+                    class="card-header py-3 d-flex flex-row align-items-center justify-content-between"
+                  >
+                    <h6 class="m-0 font-weight-bold text-primary">
+                      관련 영상 분석
+                    </h6>
+                  </div>
+                  <!--Card body-->
+                  <div class="card-body">
+                    <div class="slide slide_wrap">
+                      <div class="slide_item" id="slide_item1"></div>
+                      <div class="slide_item" id="slide_item2"></div>
+                      <div class="slide_item" id="slide_item3"></div>
+                      <div class="slide_item" id="slide_item4"></div>
+                      <div class="slide_item" id="slide_item5"></div>
+                      <div class="slide_prev_button slide_button">◀</div>
+                      <div class="slide_next_button slide_button">▶</div>
+                      <ul class="slide_pagination"></ul>
+                    </div>
                   </div>
                 </div>
               </div>
@@ -206,10 +329,20 @@
     <!-- End of Page Wrapper -->
 
     <!--데이터 받음-->
-    <input type="hidden" id="percent" value="{{ percent }}"/>
-    <input type="hidden" id="top5_text" value="{{ top5_text }}"/>
-    <input type="hidden" id="low5_text" value="{{ low5_text }}"/>
-    <input type="hidden" id="keyword" value="{{ keyword }}"/>
+    <input type="hidden" id="percent" value="{{ percent }}" />
+    <input type="hidden" id="top5_text" value="{{ top5_text }}" />
+    <input type="hidden" id="low5_text" value="{{ low5_text }}" />
+    <input type="hidden" id="keyword" value="{{ keyword }}" />
+    <input type="hidden" id="likes" value="{{ likes }}" />
+    <input type="hidden" id="likes_text" value="{{ likes_text }}" />
+    <input
+      type="hidden"
+      id="relation_thumbnails"
+      value="{{relation_thumbnails}}"
+    />
+    <input type="hidden" id="relation_title" value="{{relation_title}}" />
+    <input type="hidden" id="relation_id" value="{{relation_id}}" />
+    <input type="hidden" id="time" value="{{time}}" />
 
     <!-- Scroll to Top Button-->
     <a class="scroll-to-top rounded" href="#page-top">
@@ -229,12 +362,33 @@
     <!-- Page level plugins -->
     <script src="{%static 'vendor/chart.js/Chart.min.js'%}"></script>
 
-    <!-- Page level custom scripts -->
-    <script src="{%static 'js/graph/chart-area.js'%}"></script>
-    <script type="text/javascript" src="{%static 'js/graph/chart-pie.js'%}"></script>
+    <!-- 그래프 -->
+    <script
+      type="text/javascript"
+      src="{%static 'js/graph/chart-area.js'%}"
+    ></script>
+    <script
+      type="text/javascript"
+      src="{%static 'js/graph/chart-pie.js'%}"
+    ></script>
+
+    <!--관련영상분석-->
+    <script
+      type="text/javascript"
+      src="{%static 'js/getRelatedVideos.js'%}"
+    ></script>
+
+    <!--좋아요 순 댓글-->
+    <script
+      type="text/javascript"
+      src="{%static 'js/getLikesComments.js'%}"
+    ></script>
 
     <!--긍정부정 댓글 설정-->
-    <script type="text/javascript" src="{%static 'js/getTopComment.js'%}"></script>
+    <script
+      type="text/javascript"
+      src="{%static 'js/getTopComment.js'%}"
+    ></script>
 
     <!--워드클라우드 단어 설정-->
     <script
@@ -244,6 +398,5 @@
     <!-- 워드클라우드 -->
     <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.4.4/jquery.js"></script>
     <script src="{%static 'js\graph\jqcloud-0.2.10.js'%}"></script>
-
   </body>
 </html>

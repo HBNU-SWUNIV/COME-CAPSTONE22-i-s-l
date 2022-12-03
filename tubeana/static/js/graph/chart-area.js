@@ -1,59 +1,60 @@
+var timeStr = document.getElementById("time").value;
+var timeArr = timeStr.split("\n").slice(2);
+var fTimeArr = [];
+var xArr = [];
+var yArr = [];
+var tooltipArr = [];
+var acc = 0;
+
+console.log(timeArr);
+
+for (let i = 0; i < timeArr.length; i++) {
+  let tmpArr = timeArr[i].split(" ");
+  tmpArr = tmpArr.filter(function (item) {
+    return item !== "";
+  });
+  fTimeArr.push(tmpArr);
+}
+console.log(fTimeArr);
+
+var day = fTimeArr[0][0].substr(5, 2);
+xArr.push(fTimeArr[0][0].substr(2, 5).replace("-", "/"));
+for (let i = 0; i < fTimeArr.length; i++) {
+  if (fTimeArr[i][0].substr(5, 2) == day) {
+    acc += Number(fTimeArr[i][2]);
+  } else {
+    yArr.push(acc);
+    day = fTimeArr[i][0].substr(5, 2);
+    xArr.push(fTimeArr[i][0].substr(2, 5).replace("-", "/"));
+    acc = Number(fTimeArr[i][2]);
+  }
+}
+yArr.push(acc);
+
+// console.log(xArr);
+// console.log(yArr);
+
+/////////////////
 // Set new default font family and font color to mimic Bootstrap's default styling
 (Chart.defaults.global.defaultFontFamily = "Nunito"),
   '-apple-system,system-ui,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif';
 Chart.defaults.global.defaultFontColor = "#858796";
 
-function number_format(number, decimals, dec_point, thousands_sep) {
-  // *     example: number_format(1234.56, 2, ',', ' ');
-  // *     return: '1 234,56'
-  number = (number + "").replace(",", "").replace(" ", "");
-  var n = !isFinite(+number) ? 0 : +number,
-    prec = !isFinite(+decimals) ? 0 : Math.abs(decimals),
-    sep = typeof thousands_sep === "undefined" ? "," : thousands_sep,
-    dec = typeof dec_point === "undefined" ? "." : dec_point,
-    s = "",
-    toFixedFix = function (n, prec) {
-      var k = Math.pow(10, prec);
-      return "" + Math.round(n * k) / k;
-    };
-  // Fix for IE parseFloat(0.55).toFixed(0) = 0;
-  s = (prec ? toFixedFix(n, prec) : "" + Math.round(n)).split(".");
-  if (s[0].length > 3) {
-    s[0] = s[0].replace(/\B(?=(?:\d{3})+(?!\d))/g, sep);
-  }
-  if ((s[1] || "").length < prec) {
-    s[1] = s[1] || "";
-    s[1] += new Array(prec - s[1].length + 1).join("0");
-  }
-  return s.join(dec);
-}
+function TopTime(time) {}
 
 // Area Chart Example
 var ctx = document.getElementById("myAreaChart");
 var myLineChart = new Chart(ctx, {
   type: "line",
   data: {
-    labels: [
-      "Jan",
-      "Feb",
-      "Mar",
-      "Apr",
-      "May",
-      "Jun",
-      "Jul",
-      "Aug",
-      "Sep",
-      "Oct",
-      "Nov",
-      "Dec",
-    ],
+    labels: xArr,
     datasets: [
       {
-        label: "Earnings",
+        label: "댓글 수 ",
         lineTension: 0.3,
         backgroundColor: "rgba(78, 115, 223, 0.05)",
         borderColor: "rgba(78, 115, 223, 1)",
-        pointRadius: 3,
+        pointRadius: 2,
         pointBackgroundColor: "rgba(78, 115, 223, 1)",
         pointBorderColor: "rgba(78, 115, 223, 1)",
         pointHoverRadius: 3,
@@ -61,10 +62,7 @@ var myLineChart = new Chart(ctx, {
         pointHoveIJIJLJLJLKDFSDrBorderColor: "rgba(78, 115, 223, 1)",
         pointHitRadius: 10,
         pointBorderWidth: 2,
-        data: [
-          0, 10000, 5000, 15000, 10000, 20000, 15000, 25000, 20000, 30000,
-          25000, 40000,
-        ],
+        data: yArr,
       },
     ],
   },
@@ -88,20 +86,18 @@ var myLineChart = new Chart(ctx, {
             display: false,
             drawBorder: false,
           },
-          ticks: {
-            maxTicksLimit: 7,
-          },
+          // ticks: {
+          //   maxTicksLimit: 20,
+          // },
+          padding: 10,
         },
       ],
       yAxes: [
         {
           ticks: {
-            maxTicksLimit: 5,
+            autoSkip: true,
+            maxTicksLimit: 10,
             padding: 10,
-            // Include a dollar sign in the ticks
-            callback: function (value, index, values) {
-              return "$" + number_format(value);
-            },
           },
           gridLines: {
             color: "rgb(234, 236, 244)",
@@ -121,20 +117,40 @@ var myLineChart = new Chart(ctx, {
       bodyFontColor: "#858796",
       titleMarginBottom: 10,
       titleFontColor: "#6e707e",
-      titleFontSize: 14,
+      titleFontSize: 12,
       borderColor: "#dddfeb",
       borderWidth: 1,
-      xPadding: 15,
-      yPadding: 15,
+      xPadding: 10,
+      yPadding: 10,
       displayColors: false,
       intersect: false,
       mode: "index",
       caretPadding: 10,
       callbacks: {
-        label: function (tooltipItem, chart) {
-          var datasetLabel =
-            chart.datasets[tooltipItem.datasetIndex].label || "";
-          return datasetLabel + ":  $" + number_format(tooltipItem.yLabel);
+        label: (tooltipItem, data) => {
+          var multiString = [];
+          let label = data.datasets[tooltipItem.datasetIndex].label;
+          let value =
+            data.datasets[tooltipItem.datasetIndex].data[tooltipItem.index];
+          let x = data.labels[tooltipItem.index].replace("/", "-");
+          let rankArr = [];
+
+          fTimeArr.forEach((item, i) => {
+            if (item[0].substr(2, 5) == x) {
+              rankArr.push([item[0].substr(8, 2), item[2]]);
+            }
+          });
+
+          rankArr.sort((a, b) => b[1] - a[1]);
+
+          multiString.push(`총 ${value}개`);
+          multiString.push("");
+
+          for (let i = 0; i < 3; i++) {
+            if (typeof rankArr[i] != "undefined")
+              multiString.push(`${rankArr[i][0]}일 : ${rankArr[i][1]}개`);
+          }
+          return multiString;
         },
       },
     },

@@ -5,7 +5,7 @@ from googleapiclient.discovery import build
 #pip install google-api-python-client
 
 def getComments(urlvalue) :
-    DEVELOPER_KEY = "{Your google api}"
+    DEVELOPER_KEY = "Your Google API Key"
     YOUTUBE_API_SERVICE_NAME = "youtube"
     YOUTUBE_API_VERSION = "v3"
     reviews = []

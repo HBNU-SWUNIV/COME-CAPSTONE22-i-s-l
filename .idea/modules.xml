@@ -2,7 +2,7 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/.idea/youtubeCommentsAnalysis-seoyeon.iml" filepath="$PROJECT_DIR$/.idea/youtubeCommentsAnalysis-seoyeon.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/youtubeCommentsAnalysis.iml" filepath="$PROJECT_DIR$/.idea/youtubeCommentsAnalysis.iml" />
     </modules>
   </component>
 </project>
