@@ -5,3 +5,7 @@
  <span style="color:red">
  - **기업 기밀 데이터가 Github에 공개되었을 시의 책임은 공개한 학생에게 있음**
  </span>
+
+## 사용 라이브러리
+
+- [Konlpy(한국어 형태소 분석기)](https://github.com/konlpy/konlpy)
