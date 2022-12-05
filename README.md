@@ -1,12 +1,11 @@
-# 한밭대학교 컴퓨터공학과 I.S.L 팀
+# 한밭대학교 OOOO학과 ㅁㅁㅁㅁ팀
 
-### 팀 구성
+**팀 구성**
 - 20171625 이형석
 - 20171596 정병훈
 - 20191266 전서연
 
-### 프로젝트 배경
-
+### Project Background
 - 유튜브 시장의 확대
     - ![1](https://user-images.githubusercontent.com/83962223/205578606-3e58fbcd-d0e4-4652-b706-4ecdccbc61d7.png)
     
@@ -27,25 +26,25 @@
 
 따라서 우리는 댓글 분석 서비스(긍 부정)를 포함해 댓글에서 가져올 수 있는 부가적인 데이터를 분석하고 시각화
 
-
-### 시스템 디자인
+  
+## System Design
 
 - <img width="950" alt="3" src="https://user-images.githubusercontent.com/83962223/205578858-8db79ef0-fee3-41e7-84f6-1c1485bbf4b4.png">
 
 - 시스템 요구사항
    - 댓글 감성분석을 위한 유튜브 영상 댓글(샘플 데이터) 수집 -> Youtube API 사용
-    - 다양한 장르의 영상 댓글을 수집함으로써 정확도 향상
-    - 유튜브 크리에이터는 많은 양의 댓글을 분석하여 통계화를 거친 결과를 볼 수 있음
-    - 분석 결과 시각화에는 Django를 사용 
+   - 다양한 장르의 영상 댓글을 수집함으로써 정확도 향상
+   - 유튜브 크리에이터는 많은 양의 댓글을 분석하여 통계화를 거친 결과를 볼 수 있음
+   - 분석 결과 시각화에는 Django를 사용 
 
-### 결론
-
+## Case Study
+  
+## Conclusion
 - 유튜브 크리에이터들의 댓글 분석 방법 변화
     - 이전 : 많은 양의 댓글을 직접 읽을 경우, 실제로 통계화하기엔 어려움이 따름
     - 이후 : 프로젝트 사용시, 댓글의 분석결과를 한 눈에 파악 가능
 
-### 프로젝트 결과
-
+## Project Outcome
 - <img width="1552" alt="4" src="https://user-images.githubusercontent.com/83962223/205578928-cbb84c81-ede3-41af-9191-4722386fc358.png">
 
 - <img width="1552" alt="5" src="https://user-images.githubusercontent.com/83962223/205579000-77ee3e6f-b8f6-47e0-bf97-711e8cd911ad.png">
