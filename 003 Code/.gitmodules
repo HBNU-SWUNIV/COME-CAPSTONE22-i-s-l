@@ -1,0 +1,3 @@
+[submodule "Django"]
+      path = Django
+      url = https://github.com/gudtjr2949/I.S.L_Capstone-Disgn.git
